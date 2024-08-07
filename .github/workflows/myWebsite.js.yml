@@ -2,12 +2,12 @@ name: myWebsite
 
 on:
   push:
-    branches: [ staging, prod ]
+    branches: [ main, staging ]
   pull_request:
-    branches: [ staging,prod ]
+    branches: [ main, staging ]
 
 jobs:
-  main:
+  production:
     runs-on: [self-hosted, prod]
     if: github.ref == 'refs/heads/main'
     # with:
@@ -40,20 +40,19 @@ jobs:
 
       - name: Install dependencies
         run: |
-          ls
           npm i 
 
-      # - name: Create env file
-      #   run: |
-      #     ls
-      #     echo "${{ secrets.ENV_FILE }}" > .env
+      - name: Create env file
+        run: |
+          ls
+          echo "${{ secrets.ENV_FILE }}" > .env
           
       - name: Start Building
         run: |
           ls
           echo "deployment Successful"
           npm run build
-  
+ 
         # this pm2 start function is used when server is restarted 
         # otherwise we will just use pm2 restart 0 and save
     #   - name: Start server using pm2
