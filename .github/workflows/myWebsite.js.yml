@@ -7,7 +7,7 @@ on:
     branches: [ staging,prod ]
 
 jobs:
-  production:
+  main:
     runs-on: [self-hosted, prod]
     if: github.ref == 'refs/heads/main'
     # with:
